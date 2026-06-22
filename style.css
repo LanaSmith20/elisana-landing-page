@@ -7,19 +7,21 @@
 
 /* CORES DO SITE */
 :root {
-  --white: #FAF8F5;
-  --brown: #2C1810;
-  --rose-light: #F2DFDA;
-  --rose: #C4908A;
+  --white: #faf8f5;
+  --brown: #2c1810;
+  --rose-light: #f2dfda;
+  --rose: #c4908a;
   --text-light: #9b7b73;
 }
 
 /* CONFIGURAÇÃO GERAL */
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 86px;
 }
 
 body {
+overflow-x: hidden;
   font-family: "Lato", sans-serif;
   background-color: var(--white);
   color: var(--brown);
@@ -651,15 +653,120 @@ body {
   font-size: 14px;
 }
 
+/* NAVBAR COM EFEITO AO ROLAR */
+.navbar.scrolled {
+  box-shadow: 0 8px 30px rgba(44, 24, 16, 0.12);
+  background-color: rgba(250, 248, 245, 0.95);
+  backdrop-filter: blur(10px);
+}
+/* ANIMAÇÃO SUAVE AO APARECER NA TELA */
+.reveal {
+  opacity: 0;
+  transform: translateY(25px);
+  transition: 
+    opacity 0.6s ease,
+    transform 0.6s ease;
+}
+
+.reveal.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* EFEITO GERAL NOS BOTÕES */
+.btn,
+.nav-btn,
+.contact-form button {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn:hover,
+.nav-btn:hover,
+.contact-form button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(44, 24, 16, 0.18);
+}
+
+/* EFEITO MAIS SUAVE NAS IMAGENS */
+.hero-image img,
+.about-image img,
+.service-card img,
+.gallery img {
+  transition:
+    transform 0.5s ease,
+    filter 0.5s ease;
+}
+
+.hero-image:hover img,
+.about-image:hover img,
+.service-card:hover img,
+.gallery img:hover {
+  filter: brightness(1.03);
+}
+
+/* BOTÃO FLUTUANTE DO WHATSAPP */
+.whatsapp-float {
+  position: fixed;
+  right: 25px;
+  bottom: 25px;
+
+  background-color: #25d366;
+  color: white;
+
+  padding: 16px 22px;
+  border-radius: 50px;
+
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 15px;
+
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+  z-index: 2000;
+
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.whatsapp-float:hover {
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 0 16px 35px rgba(0, 0, 0, 0.3);
+}
+
+/* CORREÇÃO DO HOVER QUANDO O ELEMENTO TAMBÉM TEM REVEAL */
+.service-card.reveal.show:hover,
+.testimonial-card.reveal.show:hover {
+  transform: translateY(-8px) scale(1);
+}
+
+.gallery img.reveal.show:hover {
+  transform: scale(1.03);
+}
+/* EVITA BARRA HORIZONTAL NO CELULAR */
+body {
+  overflow-x: hidden;
+}
+
 /* RESPONSIVO PARA TABLET E CELULAR */
 @media (max-width: 900px) {
   .navbar {
+    height: 80px;
     padding: 0 25px;
+  }
+
+  .logo h1 {
+    font-size: 24px;
+  }
+
+  .logo p {
+    font-size: 9px;
+    letter-spacing: 2px;
   }
 
   .nav-links {
     position: absolute;
-    top: 86px;
+    top: 80px;
     left: 0;
 
     width: 100%;
@@ -667,14 +774,22 @@ body {
 
     display: none;
     flex-direction: column;
+    align-items: center;
     gap: 22px;
 
     padding: 30px 0;
     border-bottom: 1px solid #eee1dc;
+    box-shadow: 0 15px 35px rgba(44, 24, 16, 0.12);
+
+    z-index: 999;
   }
 
   .nav-links.active {
     display: flex;
+  }
+
+  .nav-links a {
+    font-size: 17px;
   }
 
   .nav-btn {
@@ -687,7 +802,7 @@ body {
 
   .hero {
     grid-template-columns: 1fr;
-    padding: 130px 25px 70px;
+    padding: 125px 25px 70px;
     gap: 40px;
   }
 
@@ -702,6 +817,12 @@ body {
   .hero-buttons {
     flex-direction: column;
     align-items: flex-start;
+  }
+
+  .btn {
+    width: 100%;
+    max-width: 280px;
+    text-align: center;
   }
 
   .hero-image img {
@@ -726,6 +847,7 @@ body {
 
   .about {
     grid-template-columns: 1fr;
+    gap: 40px;
   }
 
   .about-image img {
@@ -736,39 +858,136 @@ body {
     grid-template-columns: repeat(2, 1fr);
   }
 
+  .section-header {
+    margin-bottom: 45px;
+  }
+
   .section-header h2,
   .about-content h2 {
     font-size: 42px;
+  }
+
+  .footer {
+    padding: 60px 25px 25px;
   }
 }
 
 /* RESPONSIVO PARA CELULAR PEQUENO */
 @media (max-width: 550px) {
+  .navbar {
+    height: 76px;
+    padding: 0 18px;
+  }
+
+  .nav-links {
+    top: 76px;
+  }
+
   .logo h1 {
-    font-size: 22px;
+    font-size: 21px;
   }
 
   .logo p {
-    font-size: 9px;
-    letter-spacing: 2px;
+    font-size: 8px;
+    letter-spacing: 1.5px;
   }
 
-  .hero-content h2 {
-    font-size: 38px;
+  .menu-toggle {
+    font-size: 30px;
+  }
+
+  .hero {
+    padding: 115px 18px 60px;
   }
 
   .section-tag {
     letter-spacing: 3px;
     font-size: 11px;
+    margin-bottom: 18px;
   }
 
-  .hero-image img,
+  .hero-content h2 {
+    font-size: 37px;
+    line-height: 1.18;
+  }
+
+  .hero-content p {
+    font-size: 16px;
+    line-height: 1.7;
+  }
+
+  .hero-buttons {
+    width: 100%;
+  }
+
+  .btn {
+    width: 100%;
+    max-width: none;
+  }
+
+  .hero-image {
+    padding: 12px;
+    border-radius: 28px;
+  }
+
+  .hero-image img {
+    height: 360px;
+    border-radius: 22px;
+  }
+
+  .services,
+  .about,
+  .cities,
+  .results,
+  .testimonials,
+  .contact {
+    padding: 65px 18px;
+  }
+
+  .section-header h2,
+  .about-content h2 {
+    font-size: 34px;
+  }
+
+  .section-header p,
+  .about-content p {
+    font-size: 16px;
+  }
+
+  .service-card img {
+    height: 260px;
+  }
+
+  .service-content {
+    padding: 24px;
+  }
+
+  .service-content h3 {
+    font-size: 24px;
+  }
+
+  .about-image {
+    padding: 12px;
+    border-radius: 28px;
+  }
+
   .about-image img {
-    height: 380px;
+    height: 360px;
+    border-radius: 22px;
   }
 
-  .services-container {
-    grid-template-columns: 1fr;
+  .quote {
+    font-size: 22px;
+    padding: 24px;
+  }
+
+  .city-list {
+    gap: 10px;
+  }
+
+  .city-list p {
+    font-size: 14px;
+    padding: 12px 18px;
   }
 
   .gallery {
@@ -776,18 +995,38 @@ body {
   }
 
   .gallery img {
-    height: 330px;
+    height: 320px;
   }
 
-  .contact-form {
+  .testimonial-card {
     padding: 28px;
   }
 
-  .footer {
-    padding: 60px 25px 25px;
+  .contact-form {
+    padding: 26px;
+  }
+
+  .contact-box {
+    padding: 24px;
   }
 
   .footer-content {
-  grid-template-columns: 1fr;
-}
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .footer h2 {
+    font-size: 28px;
+  }
+
+  .footer h3 {
+    font-size: 22px;
+  }
+
+  .whatsapp-float {
+    right: 18px;
+    bottom: 18px;
+    padding: 14px 18px;
+    font-size: 14px;
+  }
 }
