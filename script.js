@@ -73,7 +73,7 @@ if (navbar) {
 
 // ANIMAÇÃO SUAVE AO DESCER A PÁGINA
 const revealElements = document.querySelectorAll(
-  ".services, .about, .cities, .results, .testimonials, .contact",
+  ".services, .about, .cities, .results, .testimonials, .care, .faq, .contact",
 );
 
 revealElements.forEach(function (element) {
@@ -96,4 +96,58 @@ const revealObserver = new IntersectionObserver(
 
 revealElements.forEach(function (element) {
   revealObserver.observe(element);
+});
+
+// BOTÃO PARA ABRIR E FECHAR GALERIA COMPLETA
+const galleryButton = document.querySelector(".gallery-toggle-btn");
+const galleryMore = document.querySelector(".gallery-more");
+
+if (galleryButton && galleryMore) {
+  galleryButton.addEventListener("click", function () {
+    galleryMore.classList.toggle("show-gallery");
+
+    if (galleryMore.classList.contains("show-gallery")) {
+      galleryButton.textContent = "Ver menos fotos";
+    } else {
+      galleryButton.textContent = "Ver galeria completa";
+    }
+  });
+}
+
+// ABRIR IMAGEM DA GALERIA EM TELA GRANDE
+const galleryImages = document.querySelectorAll(".gallery img, .gallery-more img");
+const imageModal = document.querySelector(".image-modal");
+const modalImage = document.querySelector(".image-modal img");
+const modalClose = document.querySelector(".modal-close");
+
+if (galleryImages && imageModal && modalImage && modalClose) {
+  galleryImages.forEach(function (image) {
+    image.addEventListener("click", function () {
+      modalImage.src = image.src;
+      modalImage.alt = image.alt;
+
+      imageModal.classList.add("active");
+    });
+  });
+
+  modalClose.addEventListener("click", function () {
+    imageModal.classList.remove("active");
+  });
+
+  imageModal.addEventListener("click", function (event) {
+    if (event.target === imageModal) {
+      imageModal.classList.remove("active");
+    }
+  });
+}
+
+// FAQ ABRE E FECHA
+const faqItems = document.querySelectorAll(".faq-item");
+
+faqItems.forEach(function (item) {
+  const question = item.querySelector(".faq-question");
+
+  question.addEventListener("click", function () {
+    item.classList.toggle("active");
+  });
 });
