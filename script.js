@@ -73,7 +73,7 @@ if (navbar) {
 
 // ANIMAÇÃO SUAVE AO DESCER A PÁGINA
 const revealElements = document.querySelectorAll(
-  ".services, .about, .cities, .results, .testimonials, .care, .faq, .contact",
+  ".services, .about, .cities, .results, .testimonials,  .care, .faq, .contact",
 );
 
 revealElements.forEach(function (element) {
